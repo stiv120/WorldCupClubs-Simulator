@@ -29,6 +29,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Instalamos las extensiones de PHP necesarias
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-install bcmath
 RUN docker-php-ext-configure gd --with-external-gd
 RUN docker-php-ext-install gd
 
@@ -46,8 +47,17 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 # Copiamos el contenido del directorio de nuestra aplicación al contenedor
 COPY . /var/www
 
-# Copiamos los permisos del directorio de nuestra aplicación al contenedor
-COPY --chown=www:www . /var/www
+# Establecemos los permisos correctos
+RUN chown -R www:www /var/www \
+    && chmod -R 755 /var/www \
+    && chmod -R 775 /var/www/storage \
+    && chmod -R 775 /var/www/bootstrap/cache
+
+# Aseguramos que el directorio storage y sus subdirectorios tengan los permisos correctos
+RUN mkdir -p /var/www/storage/app/public \
+    && chmod -R 775 /var/www/storage/app/public \
+    && chown -R www:www /var/www/storage
+
 
 # Copiamos el archivo .env
 COPY .env.example /var/www/.env

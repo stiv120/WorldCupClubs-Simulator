@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::middleware('web')
-                ->prefix('teams')
+                ->prefix('equipos')
                 ->as('teams.')
                 ->group(base_path('routes/teams.php'));
         }
