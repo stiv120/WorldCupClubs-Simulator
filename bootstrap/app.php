@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->prefix('equipos')
                 ->as('teams.')
                 ->group(base_path('routes/teams.php'));
+
+            Route::middleware('web')
+                ->prefix('jugadores')
+                ->as('players.')
+                ->group(base_path('routes/players.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {

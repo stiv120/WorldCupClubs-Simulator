@@ -74,7 +74,6 @@ class TeamController extends Controller
         if (!$storeTeam) {
             throw new CustomJsonException(['message' => 'Error al crear el Equipo.']);
         }
-
         return response()->json(['message' => 'Equipo creado correctamente.'], 201);
     }
 }

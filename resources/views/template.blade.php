@@ -25,7 +25,7 @@
                         <a class="nav-link {{ request()->routeIs('team.index') ? 'active' : '' }}" href="{{ route('teams.index') }}">Gestionar Equipos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#gestionar-jugadores">Gestionar Jugadores</a>
+                        <a class="nav-link {{ request()->routeIs('player.index') ? 'active' : '' }}" href="{{ route('players.index') }}">Gestionar Jugadores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#simulacion">Simulación</a>

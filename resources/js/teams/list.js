@@ -44,7 +44,6 @@ export const refreshTeamsList = async () => {
             LoaderService.hideLoader(tableContainer);
         },
     };
-
     // Realizar la petición al servidor
     await HttpClient.get(route("teams.list"), config);
 };

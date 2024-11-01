@@ -13,11 +13,10 @@ class StoreTeamRequest extends FormRequest
 {
     /**
      * Define las reglas de validación para la creación de equipos
-     * @return array Reglas de validación
-     * Las reglas incluyen:
-     * - país: requerido, string, máximo 255 caracteres
-     * - nombre: requerido, string, máximo 255 caracteres, único (ignorando espacios y mayúsculas)
-     * - url_bandera: requerido, debe ser imagen, tipos permitidos: jpeg,png,jpg,gif, máximo 2MB
+     * @return array Reglas de validación que incluyen:
+     *               - pais: string, máximo 255 caracteres
+     *               - nombre: string, máximo 255 caracteres, único ignorando espacios y mayúsculas
+     *               - url_bandera: imagen válida hasta 2MB (jpeg, png, jpg, gif)
      */
     public function rules()
     {
@@ -40,10 +39,12 @@ class StoreTeamRequest extends FormRequest
 
     /**
      * Define los mensajes personalizados para las reglas de validación
-     * @return array Mensajes de error personalizados
-     * Los mensajes incluyen:
-     * - Validaciones para la imagen (requerida, tipo, tamaño)
-     * - Validación de unicidad del nombre
+     * @return array Mensajes de error personalizados para:
+     *               - Validación de imagen (requerida)
+     *               - Formato de imagen válido
+     *               - Tamaño máximo de archivo
+     *               - Tipos de archivo permitidos
+     *               - Nombre de equipo duplicado
      */
     public function messages()
     {
