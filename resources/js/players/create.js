@@ -47,11 +47,11 @@ const createPlayer = (form) => {
             });
 
             const errorData = error.response?.data || error;
-            if (errorData.errors || errorData.validaciones) {
+            if (errorData.errors) {
                 ValidationService.showValidationErrors({
                     form,
                     scroll: true,
-                    errors: errorData?.errors || errorData?.validaciones,
+                    errors: errorData?.errors,
                 });
             }
             Toast.error(errorData?.message ?? "Error al crear el jugador");
@@ -65,7 +65,6 @@ const createPlayer = (form) => {
         text: "Guardando...",
         btnTextClass: ".btnGuardarJugadorText",
     });
-
     HttpClient.post(route("players.store"), formData, config);
 };
 

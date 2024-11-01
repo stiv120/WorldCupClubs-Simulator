@@ -28,7 +28,10 @@
                         <a class="nav-link {{ request()->routeIs('player.index') ? 'active' : '' }}" href="{{ route('players.index') }}">Gestionar Jugadores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#simulacion">Simulación</a>
+                        <a class="nav-link {{ request()->routeIs('imports.index') ? 'active' : '' }}" href="{{ route('imports.index') }}">Importar Equipos y Jugadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('simulations.index') ? 'active' : '' }}" href="{{ route('simulations.index') }}">Simulación</a>
                     </li>
                 </ul>
             </div>

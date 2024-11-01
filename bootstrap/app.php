@@ -21,6 +21,16 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->prefix('jugadores')
                 ->as('players.')
                 ->group(base_path('routes/players.php'));
+
+            Route::middleware('web')
+                ->prefix('simulaciones')
+                ->as('simulations.')
+                ->group(base_path('routes/simulations.php'));
+
+            Route::middleware('web')
+                ->prefix('importaciones')
+                ->as('imports.')
+                ->group(base_path('routes/imports.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {

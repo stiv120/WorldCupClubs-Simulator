@@ -22,6 +22,18 @@ interface TeamRepositoryInterface
      * @return array
      */
     public function findAll();
+
+    /**
+     * Obtiene la cantidad de equipos
+     * @return int
+     */
+    public function count();
+
+    /**
+     * Obtiene la cantidad de equipos con jugadores válidos
+     * @return int
+     */
+    public function validTeamsWithPlayers();
 }
 
 

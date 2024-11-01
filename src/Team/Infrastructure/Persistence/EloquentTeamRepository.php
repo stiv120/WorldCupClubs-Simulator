@@ -38,6 +38,26 @@ class EloquentTeamRepository implements TeamRepositoryInterface
     {
         return EloquentTeam::all();
     }
+
+    /**
+     * Obtiene la cantidad de equipos de la base de datos
+     * @return int Cantidad de equipos
+     */
+    public function count()
+    {
+        return EloquentTeam::count();
+    }
+
+    /**
+     * Obtiene la cantidad de equipos con jugadores válidos
+     * @return int Cantidad de equipos
+     */
+    public function validTeamsWithPlayers()
+    {
+        return EloquentTeam::withCount('players')
+            ->having('players_count', '>=', 11)
+            ->count();
+    }
 }
 
 

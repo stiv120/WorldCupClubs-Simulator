@@ -9,6 +9,8 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/teams/index.js",
                 "resources/js/players/index.js",
+                "resources/js/imports/index.js",
+                "resources/js/simulations/index.js",
             ],
             refresh: true,
         }),

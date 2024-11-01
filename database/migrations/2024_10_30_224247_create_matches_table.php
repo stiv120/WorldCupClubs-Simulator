@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('partidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grupo_id')->constrained('grupos');
+            $table->foreignId('simulacion_id')->constrained('simulaciones')->onDelete('cascade');
             $table->foreignId('equipo_local_id')->constrained('equipos');
             $table->foreignId('equipo_visitante_id')->constrained('equipos');
+            $table->enum('fase', ['octavos', 'cuartos', 'semifinal', 'final']);
+            $table->integer('orden_partido');
             $table->date('fecha');
             $table->integer('goles_local')->default(0);
             $table->integer('goles_visitante')->default(0);
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->integer('tarjetas_amarillas_visitante')->default(0);
             $table->integer('tarjetas_rojas_local')->default(0);
             $table->integer('tarjetas_rojas_visitante')->default(0);
+            $table->foreignId('equipo_ganador_id')->nullable()->constrained('equipos');
             $table->timestamp('fecha_creacion')->useCurrent();
             $table->timestamp('fecha_actualizacion')->nullable()->useCurrentOnUpdate();
         });
