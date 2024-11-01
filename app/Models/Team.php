@@ -9,7 +9,7 @@ class Team extends Model
 {
     use HasFactory;
 
-        /**
+    /**
      * Atributo que especifica el nombre de la secuencia asociado a la Tabla/Modelo
      */
     public $sequence = 's_equipos';

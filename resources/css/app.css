@@ -1,5 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+/* Tus estilos personalizados aquí */
 @import "./styles/index.css";

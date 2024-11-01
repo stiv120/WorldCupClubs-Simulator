@@ -6,12 +6,19 @@ use Src\Team\Domain\Entities\Team;
 use App\Models\Team as EloquentTeam;
 use Src\Team\Domain\Repositories\TeamRepositoryInterface;
 
+/**
+ * Implementación Eloquent del repositorio de Equipos
+ * Esta clase proporciona la implementación concreta del repositorio
+ * utilizando Eloquent como ORM para la persistencia de datos.
+ * @package Src\Team\Infrastructure\Persistence
+ */
 class EloquentTeamRepository implements TeamRepositoryInterface
 {
     /**
-     * Save a new team to the database.
-     * @param Team $team
-     * @return bool
+     * Guarda un nuevo equipo en la base de datos
+     * @param Team $team Entidad del equipo a guardar
+     * @return bool Verdadero si se guardó correctamente, falso en caso contrario
+     * @throws \Exception Si hay un error al guardar en la base de datos
      */
     public function save(Team $team)
     {
@@ -20,6 +27,16 @@ class EloquentTeamRepository implements TeamRepositoryInterface
         $eloquentTeam->nombre = $team->getNombre();
         $eloquentTeam->url_bandera = $team->getUrlBandera();
         return $eloquentTeam->save();
+    }
+
+    /**
+     * Obtiene todos los equipos de la base de datos
+     * @return \Illuminate\Database\Eloquent\Collection Colección de equipos
+     * @throws \Exception Si hay un error al consultar la base de datos
+     */
+    public function findAll()
+    {
+        return EloquentTeam::all();
     }
 }
 
