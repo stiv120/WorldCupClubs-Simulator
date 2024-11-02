@@ -224,9 +224,12 @@ Una vez que la aplicación esté corriendo, puedes acceder a las siguientes ruta
 ### Importación de Datos
 
 -   **Importar CSV**: `http://localhost:8081/importaciones` GET
+
     -   Vista principal para importación
     -   Operaciones disponibles:
         -   Subir archivo: `http://localhost:8081/importaciones/guardar` POST
+
+    Nota: Se brinda plantilla llamada `importacion.csv` en la raiz del proyecto para importar datos.
 
 ### Notas importantes:
 
