@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Team extends Model
 {
     use HasFactory;
 
-        /**
+    /**
      * Atributo que especifica el nombre de la secuencia asociado a la Tabla/Modelo
      */
     public $sequence = 's_equipos';
@@ -32,4 +33,9 @@ class Team extends Model
 
     const CREATED_AT = 'fecha_creacion';
     const UPDATED_AT = 'fecha_actualizacion';
+
+    public function players(): HasMany
+    {
+        return $this->hasMany(Player::class, 'equipo_id');
+    }
 }

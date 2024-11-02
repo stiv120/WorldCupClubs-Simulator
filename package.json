@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "watch": "vite watch"
+        "watch": "vite watch",
+        "watch-poll": "vite --watch --poll"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
@@ -16,6 +17,12 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "bootstrap": "^5.3.3"
+        "@fortawesome/fontawesome-free": "^6.6.0",
+        "@popperjs/core": "^2.11.8",
+        "bootstrap": "^5.3.3",
+        "swal": "^0.1.0",
+        "toastr": "^2.1.4",
+        "validator": "^13.12.0",
+        "ziggy-js": "^2.3.1"
     }
 }

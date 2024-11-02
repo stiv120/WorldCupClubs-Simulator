@@ -18,7 +18,7 @@ abstract class FormRequest extends FormRequestOriginal
     public function failedValidation($validator)
     {
         throw new HttpResponseException(response()->json([
-            'message' => 'Validation errors',
+            'message' => 'Errores de validación!',
             'errors' => is_array($validator) ? $validator : $validator->errors()
         ], 422));
     }
