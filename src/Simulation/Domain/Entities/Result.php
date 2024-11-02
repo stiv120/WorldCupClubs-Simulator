@@ -5,48 +5,125 @@ namespace Src\Simulation\Domain\Entities;
 class Result
 {
     private $id;
-    private $simulacionId;
-    private $equipoId;
+    private $simulacion_id;
+    private $equipo_id;
     private $eliminado;
     private $campeon;
-    private $partidosJugados;
-    private $partidosGanados;
-    private $partidosPerdidos;
-    private $golesFavor;
-    private $golesContra;
-    private $tarjetasAmarillasTotales;
-    private $tarjetasRojasTotales;
-    private $posicionFinal;
+    private $partidos_jugados;
+    private $partidos_ganados;
+    private $partidos_perdidos;
+    private $goles_favor;
+    private $goles_contra;
+    private $tarjetas_amarillas_totales;
+    private $tarjetas_rojas_totales;
+    private $posicion_final;
 
-    public function __construct(array $data)
+    public function __construct(array $attributes)
     {
-        $this->id = $data['id'] ?? null;
-        $this->simulacionId = $data['simulacion_id'];
-        $this->equipoId = $data['equipo_id'];
-        $this->eliminado = $data['eliminado'] ?? false;
-        $this->campeon = $data['campeon'] ?? false;
-        $this->partidosJugados = $data['partidos_jugados'] ?? 0;
-        $this->partidosGanados = $data['partidos_ganados'] ?? 0;
-        $this->partidosPerdidos = $data['partidos_perdidos'] ?? 0;
-        $this->golesFavor = $data['goles_favor'] ?? 0;
-        $this->golesContra = $data['goles_contra'] ?? 0;
-        $this->tarjetasAmarillasTotales = $data['tarjetas_amarillas_totales'] ?? 0;
-        $this->tarjetasRojasTotales = $data['tarjetas_rojas_totales'] ?? 0;
-        $this->posicionFinal = $data['posicion_final'] ?? null;
+        foreach ($attributes as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
     }
 
-    // Getters
-    public function getId() { return $this->id; }
-    public function getSimulacionId() { return $this->simulacionId; }
-    public function getEquipoId() { return $this->equipoId; }
-    public function isEliminado() { return $this->eliminado; }
-    public function isCampeon() { return $this->campeon; }
-    public function getPartidosJugados() { return $this->partidosJugados; }
-    public function getPartidosGanados() { return $this->partidosGanados; }
-    public function getPartidosPerdidos() { return $this->partidosPerdidos; }
-    public function getGolesFavor() { return $this->golesFavor; }
-    public function getGolesContra() { return $this->golesContra; }
-    public function getTarjetasAmarillasTotales() { return $this->tarjetasAmarillasTotales; }
-    public function getTarjetasRojasTotales() { return $this->tarjetasRojasTotales; }
-    public function getPosicionFinal() { return $this->posicionFinal; }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getSimulacionId(): ?int
+    {
+        return $this->simulacion_id;
+    }
+
+    public function getEquipoId(): ?int
+    {
+        return $this->equipo_id;
+    }
+
+    public function isEliminado(): bool
+    {
+        return $this->eliminado ?? false;
+    }
+
+    public function isCampeon(): bool
+    {
+        return $this->campeon ?? false;
+    }
+
+    public function getPartidosJugados(): int
+    {
+        return $this->partidos_jugados;
+    }
+
+    public function setPartidosJugados(int $partidos_jugados): void
+    {
+        $this->partidos_jugados = $partidos_jugados;
+    }
+
+    public function getPartidosGanados(): int
+    {
+        return $this->partidos_ganados;
+    }
+
+    public function getPartidosPerdidos(): int
+    {
+        return $this->partidos_perdidos;
+    }
+
+    public function setPartidosPerdidos(int $partidos_perdidos): void
+    {
+        $this->partidos_perdidos = $partidos_perdidos;
+    }
+
+    public function getGolesFavor(): int
+    {
+        return $this->goles_favor ?? 0;
+    }
+
+    public function getGolesContra(): int
+    {
+        return $this->goles_contra ?? 0;
+    }
+
+    public function getTarjetasAmarillasTotales(): int
+    {
+        return $this->tarjetas_amarillas_totales ?? 0;
+    }
+
+    public function getTarjetasRojasTotales(): int
+    {
+        return $this->tarjetas_rojas_totales ?? 0;
+    }
+
+    public function getPosicionFinal(): ?int
+    {
+        return $this->posicion_final;
+    }
+
+    public function updateMatchStats(
+        int $golesFavor,
+        int $golesContra,
+        int $tarjetasAmarillas,
+        int $tarjetasRojas,
+        bool $isWinner
+    ): void {
+        $this->goles_favor = ($this->goles_favor ?? 0) + $golesFavor;
+        $this->goles_contra = ($this->goles_contra ?? 0) + $golesContra;
+        $this->tarjetas_amarillas_totales = ($this->tarjetas_amarillas_totales ?? 0) + $tarjetasAmarillas;
+        $this->tarjetas_rojas_totales = ($this->tarjetas_rojas_totales ?? 0) + $tarjetasRojas;
+        $this->partidos_jugados = ($this->partidos_jugados ?? 0) + 1;
+
+        if ($isWinner) {
+            $this->partidos_ganados = ($this->partidos_ganados ?? 0) + 1;
+        } else {
+            $this->partidos_perdidos = ($this->partidos_perdidos ?? 0) + 1;
+        }
+    }
+
+    public function setCampeon(): void
+    {
+        $this->campeon = true;
+    }
 }

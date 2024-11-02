@@ -3,8 +3,8 @@
 namespace Src\Simulation\Infrastructure\Persistence;
 
 use Src\Simulation\Domain\Entities\MatchGame;
-use Src\Simulation\Domain\Repositories\MatchGameRepositoryInterface;
 use App\Models\MatchGame as EloquentMatchGame;
+use Src\Simulation\Domain\Repositories\MatchGameRepositoryInterface;
 
 class EloquentMatchGameRepository implements MatchGameRepositoryInterface
 {
@@ -17,9 +17,7 @@ class EloquentMatchGameRepository implements MatchGameRepositoryInterface
         }
 
         $eloquentMatch->simulacion_id = $match->getSimulacionId();
-        $eloquentMatch->fase = $match->getFase();
         $eloquentMatch->orden_partido = $match->getOrdenPartido();
-        $eloquentMatch->fecha = $match->getFecha();
         $eloquentMatch->goles_local = $match->getGolesLocal();
         $eloquentMatch->goles_visitante = $match->getGolesVisitante();
         $eloquentMatch->equipo_local_id = $match->getEquipoLocalId();
@@ -36,15 +34,6 @@ class EloquentMatchGameRepository implements MatchGameRepositoryInterface
     public function findBySimulationId(int $simulacionId): array
     {
         return EloquentMatchGame::where('simulacion_id', $simulacionId)
-            ->orderBy('orden_partido')
-            ->get()
-            ->toArray();
-    }
-
-    public function findByFase(int $simulacionId, string $fase): array
-    {
-        return EloquentMatchGame::where('simulacion_id', $simulacionId)
-            ->where('fase', $fase)
             ->orderBy('orden_partido')
             ->get()
             ->toArray();

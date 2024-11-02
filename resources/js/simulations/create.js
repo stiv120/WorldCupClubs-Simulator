@@ -1,21 +1,33 @@
 "use strict";
 
 import { SELECTORS } from "./constants";
-import { refreshSections } from "./sections";
 import Toast from "../services/ToastrService";
 import HttpClient from "../services/HttpClient";
 import LoaderService from "../services/LoaderService";
 import ValidationService from "../services/ValidationService";
+import { refreshResults } from "./results";
 
 /**
- * Maneja la creación de una nueva simulación
- * @description Envía la petición al servidor para crear una nueva simulación
- *             y maneja la respuesta incluyendo la actualización de la UI
- * @throws {Error} Si hay un error en la petición al servidor
+ * Módulo para la creación de simulaciones
+ * @module Simulations/Create
+ */
+
+/**
+ * Maneja la creación de una nueva simulación de torneo
+ * @function createSimulation
+ * @description Gestiona el proceso de crear una nueva simulación:
+ * - Envía la petición al servidor para iniciar la simulación
+ * - Maneja estados de carga y errores
+ * - Actualiza la UI con los resultados
+ * - Valida que haya 8 equipos seleccionados
+ * - Verifica que cada equipo tenga mínimo 11 jugadores
+ * @throws {Error} Si hay errores de validación o en la petición
  */
 const createSimulation = () => {
     const button = document.querySelector(SELECTORS.BTN_CREATE);
-    const container = document.querySelector(SELECTORS.CONTAINER);
+    const container = document.querySelector(SELECTORS.RESULTS_CONTAINER);
+
+    LoaderService.showLoader(container);
 
     const config = {
         success: async (response) => {
@@ -29,7 +41,7 @@ const createSimulation = () => {
                 disabled: false,
                 restoreText: true,
             });
-            await refreshSections();
+            await refreshResults();
         },
         error: (error) => {
             LoaderService.hideLoader(container);

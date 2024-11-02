@@ -16,9 +16,7 @@ return new class extends Migration
             $table->foreignId('simulacion_id')->constrained('simulaciones')->onDelete('cascade');
             $table->foreignId('equipo_local_id')->constrained('equipos');
             $table->foreignId('equipo_visitante_id')->constrained('equipos');
-            $table->enum('fase', ['octavos', 'cuartos', 'semifinal', 'final']);
             $table->integer('orden_partido');
-            $table->date('fecha');
             $table->integer('goles_local')->default(0);
             $table->integer('goles_visitante')->default(0);
             $table->integer('tarjetas_amarillas_local')->default(0);

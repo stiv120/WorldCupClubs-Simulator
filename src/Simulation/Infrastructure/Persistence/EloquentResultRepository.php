@@ -77,4 +77,25 @@ class EloquentResultRepository implements ResultRepositoryInterface
             ->where('equipo_id', $equipoId)
             ->update(['campeon' => true]);
     }
+
+    public function findByTeamAndSimulation(int $teamId, int $simulationId): ?Result
+    {
+        $result = EloquentResult::where('equipo_id', $teamId)
+            ->where('simulacion_id', $simulationId)
+            ->firstOrFail();
+
+        return new Result($result->toArray());
+    }
+
+    public function updatePosition(int $simulacionId, int $equipoId, int $position): void
+    {
+        EloquentResult::where('simulacion_id', $simulacionId)
+            ->where('equipo_id', $equipoId)
+            ->update(['posicion_final' => $position]);
+    }
+
+    public function findAll(): array
+    {
+        return EloquentResult::all()->toArray();
+    }
 }

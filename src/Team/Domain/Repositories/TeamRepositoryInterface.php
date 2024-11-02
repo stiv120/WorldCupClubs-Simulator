@@ -24,6 +24,13 @@ interface TeamRepositoryInterface
     public function findAll();
 
     /**
+     * Obtiene un equipo por su ID
+     * @param int $id ID del equipo
+     * @return Team
+     */
+    public function findById($id);
+
+    /**
      * Obtiene la cantidad de equipos
      * @return int
      */

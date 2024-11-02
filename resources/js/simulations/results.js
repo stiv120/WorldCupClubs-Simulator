@@ -4,15 +4,23 @@ import HttpClient from "../services/HttpClient";
 import LoaderService from "../services/LoaderService";
 
 /**
- * Actualiza la lista de jugadores en la tabla
- * @async
- * @function refreshSections
- * @description Realiza una petición al servidor para obtener la lista actualizada de jugadores
- *             y actualiza el contenido de la tabla en el DOM
- * @returns {Promise<void>}
- * @throws {Error} Si hay un error en la petición HTTP
+ * Módulo para mostrar resultados de simulaciones
+ * @module Simulations/Results
  */
-export const refreshSections = async () => {
+
+/**
+ * Actualiza la vista de resultados de la simulación
+ * @async
+ * @function refreshResults
+ * @description Obtiene y muestra los resultados actualizados:
+ * - Realiza petición al servidor por resultados actuales
+ * - Actualiza el contenedor con los nuevos datos
+ * - Muestra loader durante la carga
+ * - Maneja errores de la petición
+ * @returns {Promise<void>}
+ * @throws {Error} Si hay error en la petición HTTP
+ */
+export const refreshResults = async () => {
     const tableContainer = document.querySelector(".divSeccionesSimulaciones");
 
     if (!tableContainer) return;
@@ -32,5 +40,5 @@ export const refreshSections = async () => {
             LoaderService.hideLoader(tableContainer);
         },
     };
-    await HttpClient.get(route("simulations.sections"), config);
+    await HttpClient.get(route("simulations.results"), config);
 };

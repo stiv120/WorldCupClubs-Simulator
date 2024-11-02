@@ -11,9 +11,7 @@ class MatchGame extends Model
 
     protected $fillable = [
         'simulacion_id',
-        'fase',
         'orden_partido',
-        'fecha',
         'goles_local',
         'goles_visitante',
         'equipo_local_id',
@@ -30,6 +28,11 @@ class MatchGame extends Model
         'fecha_creacion' => 'datetime',
         'fecha_actualizacion' => 'datetime'
     ];
+
+    const CREATED_AT = 'fecha_creacion';
+    const UPDATED_AT = 'fecha_actualizacion';
+
+    public $timestamps = false;
 
     public function simulacion(): BelongsTo
     {

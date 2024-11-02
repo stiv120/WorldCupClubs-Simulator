@@ -26,7 +26,7 @@
                     @endcomponent
                     <div class="row">
                         <div class="col-12 divSeccionesSimulaciones">
-                            @include('simulations/sections')
+                            @include('simulations/results')
                         </div>
                     </div>
                 </div>

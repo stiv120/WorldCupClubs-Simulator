@@ -31,6 +31,9 @@ class Result extends Model
         'fecha_actualizacion' => 'datetime'
     ];
 
+    const CREATED_AT = 'fecha_creacion';
+    const UPDATED_AT = 'fecha_actualizacion';
+
     public function simulacion(): BelongsTo
     {
         return $this->belongsTo(Simulation::class, 'simulacion_id');

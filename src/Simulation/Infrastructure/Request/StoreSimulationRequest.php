@@ -6,6 +6,9 @@ use App\Http\Requests\FormRequest;
 use Src\Team\Application\UseCases\GetCountTeamsUseCase;
 use Src\Team\Application\UseCases\GetTeamsWithValidPlayers;
 
+/**
+ * Request para validar la creación de una simulación
+ */
 class StoreSimulationRequest extends FormRequest
 {
     private $getCountTeamsUseCase;
@@ -19,6 +22,10 @@ class StoreSimulationRequest extends FormRequest
         $this->getTeamsWithValidPlayers = $getTeamsWithValidPlayers;
     }
 
+    /**
+     * Prepara y valida los datos antes de la simulación
+     * @throws ValidationException
+     */
     protected function prepareForValidation(): void
     {
         $teamsCount = $this->getCountTeamsUseCase->execute();

@@ -29,7 +29,15 @@ class EloquentSimulationRepository implements SimulationRepositoryInterface
             $eloquentSimulation = EloquentSimulation::findOrNew($simulation->getId());
         }
 
-        return $eloquentSimulation->save();
+        $saved = $eloquentSimulation->fill([
+            'fecha_creacion' => $simulation->getCreatedAt()
+        ])->save();
+
+        if ($saved) {
+            $simulation->setId($eloquentSimulation->id);
+        }
+
+        return $saved;
     }
 
     public function findById(int $id): ?Simulation
@@ -60,25 +68,6 @@ class EloquentSimulationRepository implements SimulationRepositoryInterface
         ->toArray();
     }
 
-    public function getTeamStats(int $equipoId): array
-    {
-        return DB::table('resultados')
-            ->join('simulaciones', 'resultados.simulacion_id', '=', 'simulaciones.id')
-            ->where('resultados.equipo_id', $equipoId)
-            ->select([
-                'resultados.equipo_id',
-                'resultados.partidos_jugados',
-                'resultados.partidos_ganados',
-                'resultados.partidos_perdidos',
-                'resultados.goles_favor',
-                'resultados.goles_contra',
-                'resultados.tarjetas_amarillas_totales',
-                'resultados.tarjetas_rojas_totales'
-            ])
-            ->first()
-            ?->toArray() ?? [];
-    }
-
     public function getChampion(): ?Simulation
     {
         $champion = EloquentSimulation::whereHas('resultados', function($query) {
@@ -103,6 +92,11 @@ class EloquentSimulationRepository implements SimulationRepositoryInterface
         ->get()
         ->map(fn($sim) => new Simulation($sim->toArray()))
         ->toArray();
+    }
+
+    public function deleteAll(): void
+    {
+        DB::table('simulaciones')->delete();
     }
 }
 

@@ -8,7 +8,6 @@ interface MatchGameRepositoryInterface
 {
     public function save(MatchGame $match): void;
     public function findBySimulationId(int $simulacionId): array;
-    public function findByFase(int $simulacionId, string $fase): array;
     public function findByTeam(int $simulacionId, int $equipoId): array;
     public function getLastMatchByTeam(int $simulacionId, int $equipoId): ?MatchGame;
 }

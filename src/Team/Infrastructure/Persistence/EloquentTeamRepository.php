@@ -40,6 +40,18 @@ class EloquentTeamRepository implements TeamRepositoryInterface
     }
 
     /**
+     * Obtiene un equipo por su ID
+     * @param int $id ID del equipo
+     * @return Team|null
+     */
+    public function findById($id)
+    {
+        $eloquentTeam = EloquentTeam::find($id);
+
+        return $eloquentTeam ? new Team($eloquentTeam->toArray()) : null;
+    }
+
+    /**
      * Obtiene la cantidad de equipos de la base de datos
      * @return int Cantidad de equipos
      */

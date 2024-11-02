@@ -34,13 +34,6 @@ interface SimulationRepositoryInterface
     public function findByFase(string $fase): array;
 
     /**
-     * Obtiene las estadísticas de un equipo
-     * @param int $equipoId
-     * @return array
-     */
-    public function getTeamStats(int $equipoId): array;
-
-    /**
      * Obtiene el equipo campeón de la simulación
      * @return Simulation|null
      */
@@ -58,4 +51,10 @@ interface SimulationRepositoryInterface
      * @return array<Simulation>
      */
     public function findByStatus(string $status): array;
+
+    /**
+     * Elimina todas las simulaciones
+     * @return void
+     */
+    public function deleteAll(): void;
 }

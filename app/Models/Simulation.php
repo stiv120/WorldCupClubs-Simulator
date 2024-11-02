@@ -14,6 +14,13 @@ class Simulation extends Model
         'fecha_actualizacion' => 'datetime'
     ];
 
+    const CREATED_AT = 'fecha_creacion';
+    const UPDATED_AT = 'fecha_actualizacion';
+
+    protected $fillable = [
+        'fecha_creacion'
+    ];
+
     /**
      * Obtiene todos los partidos de la simulación
      */

@@ -1,12 +1,17 @@
 "use strict";
 
 /**
+ * Módulo de constantes para importaciones
+ * @module Imports/Constants
+ */
+
+/**
  * Selectores DOM utilizados en el módulo de importaciones
  * @constant {Object} SELECTORS
- * @property {string} FORM - Selector del formulario de importación
- * @property {string} CONTAINER - Selector del contenedor principal
- * @property {string} BTN_IMPORT - Selector del botón de importar
- * @property {string} FILE_INPUT - Selector del input de archivo
+ * @property {string} FORM - Selector del formulario de importación CSV
+ * @property {string} FILE_INPUT - Selector del input para archivo CSV
+ * @property {string} CONTAINER - Selector del contenedor principal de importaciones
+ * @property {string} BTN_IMPORT - Selector del botón para iniciar importación
  */
 export const SELECTORS = {
     // Formulario
@@ -23,8 +28,10 @@ export const SELECTORS = {
 };
 
 /**
- * Textos utilizados en el loader
+ * Textos para estados del loader
  * @constant {Object} LOADER_TEXT
+ * @property {string} IMPORTING - Texto mostrado durante la importación
+ * @property {string} DEFAULT - Texto por defecto del botón
  */
 export const LOADER_TEXT = {
     IMPORTING: "Importando...",
